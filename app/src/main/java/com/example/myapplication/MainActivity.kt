@@ -6,6 +6,8 @@ import android.widget.TextView
 import android.widget.Toast
 import android.widget.ToggleButton
 import org.w3c.dom.Text
+import kotlin.random.Random
+import kotlin.random.nextInt
 
  class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,7 +17,9 @@ import org.w3c.dom.Text
         var buttons = arrayListOf<ToggleButton>(findViewById(R.id.toggleButton_1),findViewById(R.id.toggleButton_2),findViewById(R.id.toggleButton_3),findViewById(R.id.toggleButton_4),
             findViewById(R.id.toggleButton_5),findViewById(R.id.toggleButton_6),findViewById(R.id.toggleButton_7),findViewById(R.id.toggleButton_8),findViewById(R.id.toggleButton_9))
 
-        var kolejnosc = arrayListOf<Int>(3,5,1,2,6,4,9,7,8)
+        val kolejnosc = generateSequence {
+            Random.nextInt(1..9)
+        }.distinct().take(9).sorted().toList()
 
         var nrKlik = 0
         var nrButton = 0
@@ -40,6 +44,10 @@ import org.w3c.dom.Text
                     Toast.makeText(this, "Wygrałeś!", Toast.LENGTH_SHORT).show()
                     punkty+=10
                     findViewById<TextView>(R.id.textView_wynik).setText("Wynik: " + punkty.toString())
+
+                    val kolejnosc = generateSequence {
+                        Random.nextInt(1..9)
+                    }.distinct().take(9).toList()
                 }
             }
         }
