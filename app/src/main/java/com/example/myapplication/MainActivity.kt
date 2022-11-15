@@ -19,6 +19,7 @@ import android.widget.ToggleButton
 
         var nrKlik = 0
         var nrButton = 0
+        var punkty = 0
 
         for (i in buttons.indices)
         {
@@ -26,8 +27,16 @@ import android.widget.ToggleButton
                 nrButton = buttons[i].text.toString().toInt()
                 if (kolejnosc[nrKlik] == nrButton)
                     nrKlik++
-                else
-                    Toast.makeText(this, "Błąd!", Toast.LENGTH_SHORT).show()
+                else{
+                    nrKlik = 0
+                    for (j in buttons.indices)
+                        buttons[j].isChecked = false
+                }
+                if (nrKlik == 9){
+                    for (i in buttons.indices)
+                        buttons[i].isChecked = false
+                }
+                Toast.makeText(this, "btn txt: "+buttons[i].text+"| nrklik: "+nrKlik+"| nrbutton "+nrButton, Toast.LENGTH_SHORT).show()
             }
         }
     }
